@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <head>
         <meta charset = "UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "main.css" />
         <script type="text/javascript" src="main.js"></script>
         <title>Fadi Farag</title>
@@ -14,12 +15,19 @@
             </svg>
             <h1 style="color: white;" id="helloWorldTxt">|</h1>
         </section>
-        <section>
+        <section class="section-class-name" data-section-name="home">
             <p>Home World</p>
-        </section>
+        </section class="section-class-name" data-section-name="home">
         <section>
             <p>About</p>
         </section>
-        
+        <script>
+                $(function() {
+                    $.scrollify({
+                    section : ".section-class-name",
+                    sectionName : "section-name"
+                    });
+                });
+        </script>
     </body>
 </html>
