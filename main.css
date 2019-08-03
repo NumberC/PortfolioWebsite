@@ -15,6 +15,7 @@ body{
 
 svg{
     margin-bottom: calc(50%-400px);
+    display: block;
 }
 
 polyline{
