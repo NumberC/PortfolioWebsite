@@ -1,3 +1,19 @@
+$(function() {
+    $.scrollify({
+        section : "section",
+        scrollbars: false,
+        sectionName : "section-name",
+        before:function(i){
+            console.log(i);
+        }
+    });
+});
+function movingScrollFun(nameInput){
+    finalIn = "#" + nameInput;
+    console.log(finalIn);
+    $.scrollify.move(finalIn);
+}
+
 const theTextElem = document.getElementById("helloWorldTxt");
 
 window.onload = function() {

@@ -4,30 +4,29 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel = "stylesheet" type = "text/css" href = "main.css" />
         <script type="text/javascript" src="main.js"></script>
+        <script type="text/javascript" src="node_modules/jquery-scrollify/jquery.scrollify.js"></script>
         <title>Fadi Farag</title>
     </head>
     <body>
         <section id="loadBody"  style="text-align:center;">
             <svg>
-                <polyline points="100,0, 0,100, 100,200padding-top: calc(50vh - 200px);" style="fill:none;stroke:white;stroke-width:3" />
+                <polyline points="100,0, 0,100, 100,200" style="fill:none;stroke:white;stroke-width:3" />
                 <line x1="150" y1="200" x2="300" y2="0" style="stroke: white;stroke-width:3" />
                 <polyline points="350,0, 450,100, 350,200" style="fill:none;stroke:white;stroke-width:3" />
             </svg>
             <h1 style="color: white;" id="helloWorldTxt">|</h1>
+            <svg id="linesGoingDown">
+                <!-- <polyline points="0,0, 20,20, 40,0" style="fill:none;stroke:white;stroke-width:3" />
+                <polyline points="0,10, 20,30, 40,10" style="fill:none;stroke:white;stroke-width:3" /> -->
+                <polyline id="pointDownArrow" points="0,20, 20,40, 40,20" style="fill:none;stroke:white;stroke-width:3" />
+            </svg>
+            <!-- <button  onclick="movingScrollFun('Home')"> Hello</button> -->
         </section>
-        <section class="section-class-name" data-section-name="home">
+        <section id="HomeID" data-section-name="Home">
             <p>Home World</p>
-        </section class="section-class-name" data-section-name="home">
-        <section>
+        </section>
+        <section id="AboutID" data-section-name="About">
             <p>About</p>
         </section>
-        <script>
-                $(function() {
-                    $.scrollify({
-                    section : ".section-class-name",
-                    sectionName : "section-name"
-                    });
-                });
-        </script>
     </body>
 </html>
