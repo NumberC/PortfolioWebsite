@@ -14,9 +14,18 @@ function movingScrollFun(nameInput){
     $.scrollify.move(finalIn);
 }
 
-const theTextElem = document.getElementById("helloWorldTxt");
+var theTextElem;
+var scrollLanDiv;
+var languageImage;
+
 
 window.onload = function() {
+    theTextElem = document.getElementById("helloWorldTxt");
+
+    scrollLanDiv = document.getElementById("languageDiv");
+    languageImage = document.getElementsByClassName("language");
+
+    pageScroll();
     typeHelloWorld("Hello World!");
 };
 
@@ -58,3 +67,17 @@ function blinkingEffect(time, iteration){
         })
     })
 }
+
+//pageScroll() was inspired by jdgregson (https://stackoverflow.com/questions/49968622/auto-scroll-a-horizontal-div)
+function pageScroll() {
+    const langDivWidth = scroll.scrollWidth;
+    self.setInterval(() => {
+        if(scrollLanDiv.scrollLeft !== langDivWidth) {
+            scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft+1, 0);
+        } else{
+            scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft-1, 0);
+        }
+      }, 15);
+      scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
+}
+

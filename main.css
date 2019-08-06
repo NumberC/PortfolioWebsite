@@ -1,8 +1,11 @@
 /* Supernett Cn, Neue Heletica, FF Dot Matrix */
-@import url('https://fonts.googleapis.com/css?family=Raleway+Dots&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap');
 html{
     
-    font-family: 'Raleway Dots', cursive;
+    /* font-family: 'Raleway Dots', cursive; */
+    font-family: 'Roboto Mono', monospace;
+    overflow-y: hidden;
 }
 
 body{
@@ -10,6 +13,7 @@ body{
     height: fit-content;
     background: linear-gradient(black, #486fb0);
     margin: 0 0 0 0;
+    overflow-y: hidden;
 }
 
 /*Loading Screen*/
@@ -21,12 +25,24 @@ svg{
     padding-top: calc(50vh - 200px);
 }
 
+#HomeID{
+    width: 100%;
+    height: fit-content;
+    font-size: 3vw;
+    color: white;
+}
+
+#HomeID li{
+    display: inline;
+    text-decoration: underline;
+}
+
 #linesGoingDown{
     height: 70px;
     width: 40px;
     margin: 0 auto;
     display: block;
-    padding-top: 340px;
+    padding-top: 36vh;
 }
 
 #pointDownArrow{
@@ -68,4 +84,15 @@ section{
 p{
     color: white;
     margin: 0 0 0 0;
+}
+
+.language{
+    width: calc(100vw / 10);
+    height: calc(100vw / 10);
+
+}
+
+#languageDiv{
+  overflow-x: hidden;
+  white-space: nowrap;
 }
