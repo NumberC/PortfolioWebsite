@@ -8,6 +8,17 @@ html{
     overflow-y: hidden;
 }
 
+/* Navbar Functionality */
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+  
+.sticky + .content {
+    padding-top: 60px;
+}
+
 body{
     width: 100%;
     height: fit-content;
@@ -17,24 +28,25 @@ body{
 }
 
 /*Loading Screen*/
+#loadBody{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(Images/Banner2.PNG);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+#codingSymbolDiv{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+
 svg{
     height: 200px;
     width: 450px;
     margin: 0 auto;
     display: block;
     padding-top: calc(50vh - 200px);
-}
-
-#HomeID{
-    width: 100%;
-    height: fit-content;
-    font-size: 3vw;
-    color: white;
-}
-
-#HomeID li{
-    display: inline;
-    text-decoration: underline;
 }
 
 #linesGoingDown{
@@ -53,14 +65,37 @@ svg{
 
 @keyframes pointDownArrowAnim{
     0%{
-        opacity: 1;
-    }
-    50%{
         opacity: 0;
     }
-    100%{
+    50%{
         opacity: 1;
     }
+    100%{
+        opacity: 0;
+    }
+}
+
+/* Navbar Styling */
+a{
+    text-decoration: none;
+    color: #FFFFFF;
+
+}
+
+#SideBar li{
+    text-decoration: underline;
+    font-size: 2vw;
+    color: white;
+}
+
+#SideBar{
+    list-style-type: none;
+    height: 100vh;
+    width: fit-content;
+    display: none;
+    background-color: #171717;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
 }
 
 section{
@@ -68,28 +103,26 @@ section{
     height: 100vh;
 }
 
-#loadBody{
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(Images/Banner2.PNG);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-#codingSymbolDiv{
-    vertical-align: top;
-    display: inline-block;
-    text-align: center;
-    width: 120px;
-}
-
 p{
     color: white;
     margin: 0 0 0 0;
 }
 
-.language{
-    width: calc(100vw / 10);
-    height: calc(100vw / 10);
+/*Home Page Styling*/
+#HomeID{
+    width: 100%;
+    height: fit-content;
+    color: white;
+}
 
+.language{
+    width: calc(100vw / 15);
+    height: calc(100vw / 15);
+}
+
+.language:hover{
+    width: calc(100vw / 12);
+    height: calc(100vw / 12);;
 }
 
 #languageDiv{

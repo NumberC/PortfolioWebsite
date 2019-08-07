@@ -5,9 +5,32 @@ $(function() {
         sectionName : "section-name",
         before:function(i){
             console.log(i);
+            if(i != 0 && navbar != null){
+                console.log("Woo");
+                if(changeOfNav){
+                    console.log("YEEHAW");
+                    navbar.style.display = "block";
+                    navSlideIn();
+                    mainCon.style.position = "relative";
+                    mainCon.style.left = navbar.offsetWidth + "px";
+                    mainCon.style.width = initContWidth - navbar.offsetWidth + "px";
+                }
+                changeOfNav =false;
+            } else if(i == 0){
+                navSlideOut();
+                console.log("Change of Nav: " + changeOfNav);
+
+                if(changeOfNav){
+                    changeOfNav = false;
+                } else{
+                    changeOfNav = true;
+                }
+            }
         }
     });
 });
+
+
 function movingScrollFun(nameInput){
     finalIn = "#" + nameInput;
     console.log(finalIn);
@@ -17,13 +40,35 @@ function movingScrollFun(nameInput){
 var theTextElem;
 var scrollLanDiv;
 var languageImage;
+var mainCon;
+var changeOfNav = true;
+var initContWidth;
 
+var navbar;
+var sticky;
+
+function sideNavFun() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+
+window.onscroll = function() {
+    sideNavFun();
+};
 
 window.onload = function() {
     theTextElem = document.getElementById("helloWorldTxt");
 
+    navbar = document.getElementById("SideBar");
+    sticky = navbar.offsetTop;
+    mainCon = document.getElementsByClassName("content")[0];
     scrollLanDiv = document.getElementById("languageDiv");
     languageImage = document.getElementsByClassName("language");
+
+    initContWidth = mainCon.offsetWidth;
 
     pageScroll();
     typeHelloWorld("Hello World!");
@@ -67,6 +112,34 @@ function blinkingEffect(time, iteration){
         })
     })
 }
+
+function navSlideOut() {
+    var pos = 0;
+    var id = setInterval(frame, 5);
+    function frame() {
+      if (pos == navbar.offsetWidth) {
+        console.log("FINISHED");
+        clearInterval(id);
+      } else {
+        pos++;
+        navbar.style.transform = "translateX(-" + pos + "px)";
+      }
+    }
+  }
+
+  function navSlideIn() {
+    var pos = -navbar.offsetWidth;
+    var id = setInterval(frame, 5);
+    function frame() {
+      if (pos == 0) {
+        console.log("FINISHED");
+        clearInterval(id);
+      } else {
+        pos++;
+        navbar.style.transform = "translateX(" + pos + "px)";
+      }
+    }
+  }
 
 //pageScroll() was inspired by jdgregson (https://stackoverflow.com/questions/49968622/auto-scroll-a-horizontal-div)
 function pageScroll() {
