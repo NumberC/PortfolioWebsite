@@ -22,7 +22,8 @@ html{
 body{
     width: 100%;
     height: fit-content;
-    background: linear-gradient(black, #486fb0);
+    /* background: linear-gradient(black, #486fb0); */
+    background: #282828;
     margin: 0 0 0 0;
     overflow-y: hidden;
 }
@@ -41,7 +42,7 @@ body{
     width: 120px;
 }
 
-svg{
+#CodingSymbolSVG{
     height: 200px;
     width: 450px;
     margin: 0 auto;
@@ -86,6 +87,9 @@ a{
     text-decoration: underline;
     font-size: 2vw;
     color: white;
+    margin-bottom: calc(100vh / 5);
+    margin-top: calc(100vh / 10);
+    opacity: 0.5;
 }
 
 #SideBar{
@@ -128,4 +132,22 @@ p{
 #languageDiv{
   overflow-x: hidden;
   white-space: nowrap;
+  
+
 }
+
+#LineSVGForPortfolio{
+    height: fit-content;
+    width: 100%;
+    margin-top: 100px;
+    margin-left: 10%;
+    
+}
+
+#BracketPortfolioSVG{
+    height: fit-content;
+    width: 100%;
+    
+}
+
+/*box-shadow: 0px 20px 50px white;*/

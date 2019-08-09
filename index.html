@@ -9,7 +9,7 @@
     </head>
     <body>
         <section id="loadBody"  style="text-align:center;">
-            <svg>
+            <svg id="CodingSymbolSVG">
                 <polyline points="100,0, 0,100, 100,200" style="fill:none;stroke:white;stroke-width:3" />
                 <line x1="150" y1="200" x2="300" y2="0" style="stroke: white;stroke-width:3" />
                 <polyline points="350,0, 450,100, 350,200" style="fill:none;stroke:white;stroke-width:3" />
@@ -24,16 +24,19 @@
         </section>
         <nav>
             <ol id="SideBar">
-                <li><a href="#HomeID">Home</a></li>
-                <li><a href="#PortfolioID">Portfolio</a></li>
-                <li><a href="#AboutID">About</a></li>
-                <li><a href="#ContactID">Contact Me</a></li>
+                <li><a href="#HomeID" onclick="smoothScrollFun('Home')">Home</a></li>
+                <li><a href="#PortfolioID" onclick="smoothScrollFun('Portfolio')">Portfolio</a></li>
+                <li><a href="#AboutID" onclick="smoothScrollFun('About')">About</a></li>
+                <li><a href="#ContactID" onclick="smoothScrollFun('Contact')">Contact Me</a></li>
             </ol>
         </nav>
         <div class="content">
             <section id="HomeID" data-section-name="Home">
+                <p>Home</p>
+            </section>
+            <section id="PortfolioID" data-section-name="Portfolio">
                 <div id="languageDiv">
-                    <img class="language" src="Images/HTML.png" href="google.com">
+                    <img class="language" src="Images/HTML.png">
                     <img class="language" src="Images/CSS3.png">
                     <img class="language" src="Images/JS.png">
                     <img class="language" src="Images/PHP.png">
@@ -42,15 +45,26 @@
                     <img class="language" src="Images/C++.png">
                     <img class="language" src="Images/Python.png">
                 </div>
-            </section>
-            <section id="PortfolioID" data-section-name="Portfolio">
-                <p>Hello! I am Fadi! Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm</p>
+                <svg id="LineSVGForPortfolio">
+                    <line x1="10%" y1="0" x2="70%" y2="0" style="fill:none;stroke:white; stroke-width:3;"/>
+                </svg>
+                <svg id="BracketPortfolioSVG">
+                    <defs>
+                        <filter id="shadow">
+                            <feDropShadow dx="0" dy="20" stdDeviation="15"/>
+                        </filter>
+                    </defs>
+
+                    <polyline points="100,0, 50,0, 50,40, 20,50, 50,60, 50,100, 100,100" style="fill:none;stroke:white;stroke-width:3" />
+                    <image class="portfolioImages" xlink:href="PortfolioImages/PortfolioSite.png" x="0" y="0" height="200px" width="200px" filter="url(#shadow)"/>
+                    <polyline points="1670,0, 1720,0, 1720,40, 1750,50, 1720,60, 1720,100, 1670,100" style="fill:none;stroke:white;stroke-width:3;" />
+                </svg>              
             </section>
             <section id="AboutID" data-section-name="About">
-                <p>Hello! I am Fadi! Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm</p>
+                <p>About Sec</p>
             </section>
             <section id="ContactID" data-section-name="Contact">
-                <p>Hello! I am Fadi! Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm Lorem ipusm</p>
+                <p>Contact Form</p>
             </section>
         </div>
         

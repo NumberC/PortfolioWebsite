@@ -6,19 +6,26 @@ $(function() {
         before:function(i){
             console.log(i);
             if(i != 0 && navbar != null){
-                console.log("Woo");
                 if(changeOfNav){
-                    console.log("YEEHAW");
                     navbar.style.display = "block";
                     navSlideIn();
                     mainCon.style.position = "relative";
                     mainCon.style.left = navbar.offsetWidth + "px";
                     mainCon.style.width = initContWidth - navbar.offsetWidth + "px";
                 }
+
+                if(i == 2){
+                    responsiveBrackForPortfolio(250, .25*250);
+                }
+                
                 changeOfNav =false;
+                var LIs = document.getElementById("SideBar").getElementsByTagName("li");
+                for(var a = 0; a < LIs.length; a++){
+                    LIs[a].style.opacity = "0.5";
+                }
+                LIs[i-1].style.opacity = "1";
             } else if(i == 0){
                 navSlideOut();
-                console.log("Change of Nav: " + changeOfNav);
 
                 if(changeOfNav){
                     changeOfNav = false;
@@ -30,19 +37,20 @@ $(function() {
     });
 });
 
-
-function movingScrollFun(nameInput){
+function smoothScrollFun(nameInput){
     finalIn = "#" + nameInput;
-    console.log(finalIn);
     $.scrollify.move(finalIn);
 }
 
 var theTextElem;
 var scrollLanDiv;
+var originalScrollContent;
+var PreviousscrollLeft = -1;
 var languageImage;
 var mainCon;
 var changeOfNav = true;
 var initContWidth;
+var bracketSVG;
 
 var navbar;
 var sticky;
@@ -67,12 +75,65 @@ window.onload = function() {
     mainCon = document.getElementsByClassName("content")[0];
     scrollLanDiv = document.getElementById("languageDiv");
     languageImage = document.getElementsByClassName("language");
+    bracketSVG = document.getElementById("BracketPortfolioSVG");
+    originalScrollContent = scrollLanDiv.innerHTML;
 
     initContWidth = mainCon.offsetWidth;
 
-    pageScroll();
+    for(var i = 0; i < 3; i++){
+        scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
+    }
+    responsiveBrackForPortfolio(250, .25*250);
+    pageScrollTimeOut(500, 1);
     typeHelloWorld("Hello World!");
 };
+
+function responsiveBrackForPortfolio(l, topAndBottomBrack){
+    var startingPoint = document.getElementById("PortfolioID").offsetWidth * (50/1920);
+    var divWidth = document.getElementById("PortfolioID").offsetWidth;
+    var h = l;
+    var bracketTipLen = document.getElementById("PortfolioID").offsetWidth * (30/1920);
+
+    console.log(startingPoint);
+    bracketSVG.getElementsByTagName("polyline")[0].points[0].x = topAndBottomBrack+startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[0].y = 0;
+    bracketSVG.getElementsByTagName("polyline")[0].points[1].x = startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[1].y = 0;
+    bracketSVG.getElementsByTagName("polyline")[0].points[2].x = startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[2].y = 0.4 * h;
+    bracketSVG.getElementsByTagName("polyline")[0].points[3].x = startingPoint-bracketTipLen;
+    bracketSVG.getElementsByTagName("polyline")[0].points[3].y = 0.5 * h;
+    bracketSVG.getElementsByTagName("polyline")[0].points[4].x = startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[4].y = 0.6 * h;
+    bracketSVG.getElementsByTagName("polyline")[0].points[5].x = startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[5].y = h;
+    bracketSVG.getElementsByTagName("polyline")[0].points[6].x = topAndBottomBrack+startingPoint;
+    bracketSVG.getElementsByTagName("polyline")[0].points[6].y = h;
+
+
+    var startingPoint2 = topAndBottomBrack+startingPoint + (l-(topAndBottomBrack * 2));
+    bracketSVG.getElementsByTagName("polyline")[1].points[0].x = startingPoint2;
+    bracketSVG.getElementsByTagName("polyline")[1].points[0].y = 0;
+    bracketSVG.getElementsByTagName("polyline")[1].points[1].x = startingPoint2+topAndBottomBrack;
+    bracketSVG.getElementsByTagName("polyline")[1].points[1].y = 0;
+    bracketSVG.getElementsByTagName("polyline")[1].points[2].x = startingPoint2+topAndBottomBrack;
+    bracketSVG.getElementsByTagName("polyline")[1].points[2].y = 0.4 * h;
+    bracketSVG.getElementsByTagName("polyline")[1].points[3].x = startingPoint2+topAndBottomBrack+bracketTipLen;
+    bracketSVG.getElementsByTagName("polyline")[1].points[3].y = 0.5 * h;
+    bracketSVG.getElementsByTagName("polyline")[1].points[4].x = startingPoint2+topAndBottomBrack;
+    bracketSVG.getElementsByTagName("polyline")[1].points[4].y = 0.6 * h;
+    bracketSVG.getElementsByTagName("polyline")[1].points[5].x = startingPoint2+topAndBottomBrack;
+    bracketSVG.getElementsByTagName("polyline")[1].points[5].y = h;
+    bracketSVG.getElementsByTagName("polyline")[1].points[6].x = startingPoint2;
+    bracketSVG.getElementsByTagName("polyline")[1].points[6].y = h;
+    bracketSVG.style.height = h+"px";
+
+    var imageClass = document.getElementsByClassName("portfolioImages");
+
+    imageClass[0].width.baseVal.value = imageClass[0].height.baseVal.value;
+    imageClass[0].y.baseVal.value = (h-imageClass[0].height.baseVal.value)/2;
+    imageClass[0].x.baseVal.value = startingPoint+(h-imageClass[0].height.baseVal.value)/2;
+}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
@@ -115,10 +176,9 @@ function blinkingEffect(time, iteration){
 
 function navSlideOut() {
     var pos = 0;
-    var id = setInterval(frame, 5);
+    var id = setInterval(frame, 1);
     function frame() {
       if (pos == navbar.offsetWidth) {
-        console.log("FINISHED");
         clearInterval(id);
       } else {
         pos++;
@@ -129,10 +189,9 @@ function navSlideOut() {
 
   function navSlideIn() {
     var pos = -navbar.offsetWidth;
-    var id = setInterval(frame, 5);
+    var id = setInterval(frame, 1);
     function frame() {
       if (pos == 0) {
-        console.log("FINISHED");
         clearInterval(id);
       } else {
         pos++;
@@ -143,14 +202,21 @@ function navSlideOut() {
 
 //pageScroll() was inspired by jdgregson (https://stackoverflow.com/questions/49968622/auto-scroll-a-horizontal-div)
 function pageScroll() {
-    const langDivWidth = scroll.scrollWidth;
     self.setInterval(() => {
-        if(scrollLanDiv.scrollLeft !== langDivWidth) {
-            scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft+1, 0);
+        scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft+1, 0);
+        if(scrollLanDiv.scrollLeft == PreviousscrollLeft){
+            PreviousscrollLeft = 0;
+            scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft-scrollLanDiv.scrollLeft,0);
         } else{
-            scrollLanDiv.scrollTo(scrollLanDiv.scrollLeft-1, 0);
+            PreviousscrollLeft = scrollLanDiv.scrollLeft;
         }
-      }, 15);
-      scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
+    }, 15);
+}
+
+function pageScrollTimeOut(sleepMS, iteration){
+    sleep(sleepMS * iteration).then(() =>{
+        pageScroll();
+        pageScrollTimeOut(sleepMS, iteration + 1)
+    })
 }
 
