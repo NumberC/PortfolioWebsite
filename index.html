@@ -53,8 +53,13 @@
                         <filter id="shadow">
                             <feDropShadow dx="0" dy="20" stdDeviation="15"/>
                         </filter>
+                        <filter id="blueTechFilter">
+                            <feFlood result="floodFill" x="0" y="0" width="100%" height="100%"
+                                flood-color="#3fafd1" flood-opacity="1"/>
+                            <feBlend in="SourceGraphic" in2="floodFill" mode="multiply"/>
+                        </filter>
                     </defs>
-                </svg>              
+                </svg>
             </section>
             <section id="AboutID" data-section-name="About">
                 <p>About Sec</p>
