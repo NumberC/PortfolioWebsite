@@ -83,6 +83,7 @@ window.onload = function() {
     for(var i = 0; i < 3; i++){
         scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
     }
+
     responsiveBrackForPortfolio(250);
     pageScrollTimeOut(500, 1);
     typeHelloWorld("Hello World!");
@@ -94,7 +95,7 @@ function responsiveBrackForPortfolio(l){
     var latestDistanceY = 0;
     var isSecondRow = false;
     for(var i = 0; i < 8*2; i = i = i+2){
-        bracketSVG.innerHTML = bracketSVG.innerHTML + "<polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/><image class='portfolioImages' xlink:href='PortfolioImages/PortfolioSite.png' width=0 height=0 filter='url(#shadow)'/><polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/>";
+        bracketSVG.innerHTML = bracketSVG.innerHTML + "<polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/><image class='portfolioImages' xlink:href='PortfolioImages/PortfolioSite.png' width=0 height=0 /><polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/>";
 
         var divWidth = document.getElementById("PortfolioID").offsetWidth;
         var topAndBottomBrack = 0.25 * l;
@@ -104,10 +105,11 @@ function responsiveBrackForPortfolio(l){
         if( latestDistanceX+l+2*bracketTipLen > screen.width){
             latestDistanceY = l + bracketTipLen;
             latestDistanceX = 0;
-            console.log("YOU HAVE OVERCOME");
-            console.log(l*2 + bracketTipLen);
-            bracketSVG.style.height = l*2 + bracketTipLen + "px";
-        } 
+            bracketSVG.style.height = l*2 + bracketTipLen +3 + "px";
+        } else{
+            console.log(latestDistanceX);
+            console.log("HERE " + latestDistanceX+l+2*bracketTipLen);
+        }
 
         var startingPoint = document.getElementById("PortfolioID").offsetWidth * (50/1920) + latestDistanceX;
         var polylineL = bracketSVG.getElementsByTagName("polyline")[i];
@@ -128,7 +130,7 @@ function responsiveBrackForPortfolio(l){
         polylineL.points[5].y = h + latestDistanceY;
         polylineL.points[6].x = topAndBottomBrack+startingPoint;
         polylineL.points[6].y = h + latestDistanceY;
-        polylineL.style = "fill:none;stroke:white;stroke-width:3";
+        polylineL.style = "fill:none;stroke:white;stroke-width:3;margin-top:0px; margin-bottom:0px;margin-left:0px;margin-right:0px;";
 
         var imageClass = document.getElementsByClassName("portfolioImages");
     
