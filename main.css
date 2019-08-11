@@ -147,7 +147,10 @@ p{
 #BracketPortfolioSVG{
     height: fit-content;
     width: 100%;
-    
 }
 
-/*box-shadow: 0px 20px 50px white;*/
+.portfolioImages:hover {
+
+    background-color: black;
+    opacity:0.2;
+}

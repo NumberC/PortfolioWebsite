@@ -15,7 +15,6 @@ $(function() {
                 }
 
                 if(i == 2){
-                    responsiveBrackForPortfolio(250, .25*250);
                 }
                 
                 changeOfNav =false;
@@ -51,6 +50,7 @@ var mainCon;
 var changeOfNav = true;
 var initContWidth;
 var bracketSVG;
+var responsiveBrackFirstTime = true;
 
 var navbar;
 var sticky;
@@ -83,56 +83,81 @@ window.onload = function() {
     for(var i = 0; i < 3; i++){
         scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
     }
-    responsiveBrackForPortfolio(250, .25*250);
+    responsiveBrackForPortfolio(250);
     pageScrollTimeOut(500, 1);
     typeHelloWorld("Hello World!");
 };
 
-function responsiveBrackForPortfolio(l, topAndBottomBrack){
-    var startingPoint = document.getElementById("PortfolioID").offsetWidth * (50/1920);
-    var divWidth = document.getElementById("PortfolioID").offsetWidth;
-    var h = l;
-    var bracketTipLen = document.getElementById("PortfolioID").offsetWidth * (30/1920);
+function responsiveBrackForPortfolio(l){
+    var itemIncrement = 0;
+    var latestDistanceX = 0;
+    var latestDistanceY = 0;
+    var isSecondRow = false;
+    for(var i = 0; i < 8*2; i = i = i+2){
+        bracketSVG.innerHTML = bracketSVG.innerHTML + "<polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/><image class='portfolioImages' xlink:href='PortfolioImages/PortfolioSite.png' width=0 height=0 filter='url(#shadow)'/><polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/>";
 
-    console.log(startingPoint);
-    bracketSVG.getElementsByTagName("polyline")[0].points[0].x = topAndBottomBrack+startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[0].y = 0;
-    bracketSVG.getElementsByTagName("polyline")[0].points[1].x = startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[1].y = 0;
-    bracketSVG.getElementsByTagName("polyline")[0].points[2].x = startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[2].y = 0.4 * h;
-    bracketSVG.getElementsByTagName("polyline")[0].points[3].x = startingPoint-bracketTipLen;
-    bracketSVG.getElementsByTagName("polyline")[0].points[3].y = 0.5 * h;
-    bracketSVG.getElementsByTagName("polyline")[0].points[4].x = startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[4].y = 0.6 * h;
-    bracketSVG.getElementsByTagName("polyline")[0].points[5].x = startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[5].y = h;
-    bracketSVG.getElementsByTagName("polyline")[0].points[6].x = topAndBottomBrack+startingPoint;
-    bracketSVG.getElementsByTagName("polyline")[0].points[6].y = h;
+        var divWidth = document.getElementById("PortfolioID").offsetWidth;
+        var topAndBottomBrack = 0.25 * l;
+        var h = l;
+        var bracketTipLen = document.getElementById("PortfolioID").offsetWidth * (30/1920);
 
+        if( latestDistanceX+l+2*bracketTipLen > screen.width){
+            latestDistanceY = l + bracketTipLen;
+            latestDistanceX = 0;
+            console.log("YOU HAVE OVERCOME");
+            console.log(l*2 + bracketTipLen);
+            bracketSVG.style.height = l*2 + bracketTipLen + "px";
+        } 
 
-    var startingPoint2 = topAndBottomBrack+startingPoint + (l-(topAndBottomBrack * 2));
-    bracketSVG.getElementsByTagName("polyline")[1].points[0].x = startingPoint2;
-    bracketSVG.getElementsByTagName("polyline")[1].points[0].y = 0;
-    bracketSVG.getElementsByTagName("polyline")[1].points[1].x = startingPoint2+topAndBottomBrack;
-    bracketSVG.getElementsByTagName("polyline")[1].points[1].y = 0;
-    bracketSVG.getElementsByTagName("polyline")[1].points[2].x = startingPoint2+topAndBottomBrack;
-    bracketSVG.getElementsByTagName("polyline")[1].points[2].y = 0.4 * h;
-    bracketSVG.getElementsByTagName("polyline")[1].points[3].x = startingPoint2+topAndBottomBrack+bracketTipLen;
-    bracketSVG.getElementsByTagName("polyline")[1].points[3].y = 0.5 * h;
-    bracketSVG.getElementsByTagName("polyline")[1].points[4].x = startingPoint2+topAndBottomBrack;
-    bracketSVG.getElementsByTagName("polyline")[1].points[4].y = 0.6 * h;
-    bracketSVG.getElementsByTagName("polyline")[1].points[5].x = startingPoint2+topAndBottomBrack;
-    bracketSVG.getElementsByTagName("polyline")[1].points[5].y = h;
-    bracketSVG.getElementsByTagName("polyline")[1].points[6].x = startingPoint2;
-    bracketSVG.getElementsByTagName("polyline")[1].points[6].y = h;
-    bracketSVG.style.height = h+"px";
+        var startingPoint = document.getElementById("PortfolioID").offsetWidth * (50/1920) + latestDistanceX;
+        var polylineL = bracketSVG.getElementsByTagName("polyline")[i];
+        var polylineR = bracketSVG.getElementsByTagName("polyline")[i+1];
+        console.log(startingPoint);
 
-    var imageClass = document.getElementsByClassName("portfolioImages");
+        polylineL.points[0].x = topAndBottomBrack+startingPoint;
+        polylineL.points[0].y = 0+latestDistanceY;
+        polylineL.points[1].x = startingPoint;
+        polylineL.points[1].y = 0+latestDistanceY;
+        polylineL.points[2].x = startingPoint;
+        polylineL.points[2].y = 0.4 * h + latestDistanceY;
+        polylineL.points[3].x = startingPoint-bracketTipLen;
+        polylineL.points[3].y = 0.5 * h + latestDistanceY;
+        polylineL.points[4].x = startingPoint;
+        polylineL.points[4].y = 0.6 * h + latestDistanceY;
+        polylineL.points[5].x = startingPoint;
+        polylineL.points[5].y = h + latestDistanceY;
+        polylineL.points[6].x = topAndBottomBrack+startingPoint;
+        polylineL.points[6].y = h + latestDistanceY;
+        polylineL.style = "fill:none;stroke:white;stroke-width:3";
 
-    imageClass[0].width.baseVal.value = imageClass[0].height.baseVal.value;
-    imageClass[0].y.baseVal.value = (h-imageClass[0].height.baseVal.value)/2;
-    imageClass[0].x.baseVal.value = startingPoint+(h-imageClass[0].height.baseVal.value)/2;
+        var imageClass = document.getElementsByClassName("portfolioImages");
+    
+        imageClass[itemIncrement].height.baseVal.value = 200;
+        imageClass[itemIncrement].width.baseVal.value = 200;
+        imageClass[itemIncrement].y.baseVal.value = (h-imageClass[0].height.baseVal.value)/2 + latestDistanceY;
+        imageClass[itemIncrement].x.baseVal.value = startingPoint+(h-imageClass[0].height.baseVal.value)/2;
+
+        var startingPoint2 = topAndBottomBrack+startingPoint + (l-(topAndBottomBrack * 2));
+        polylineR.points[0].x = startingPoint2;
+        polylineR.points[0].y = 0 + latestDistanceY;
+        polylineR.points[1].x = startingPoint2+topAndBottomBrack;
+        polylineR.points[1].y = 0 + latestDistanceY;
+        polylineR.points[2].x = startingPoint2+topAndBottomBrack;
+        polylineR.points[2].y = 0.4 * h + latestDistanceY;
+        polylineR.points[3].x = startingPoint2+topAndBottomBrack+bracketTipLen;
+        polylineR.points[3].y = 0.5 * h + latestDistanceY;
+        polylineR.points[4].x = startingPoint2+topAndBottomBrack;
+        polylineR.points[4].y = 0.6 * h + latestDistanceY;
+        polylineR.points[5].x = startingPoint2+topAndBottomBrack;
+        polylineR.points[5].y = h + latestDistanceY;
+        polylineR.points[6].x = startingPoint2;
+        polylineR.points[6].y = h + latestDistanceY;
+        polylineR.style = "fill:none;stroke:white;stroke-width:3";
+
+        latestDistanceX = polylineR.points[3].x;
+        
+        itemIncrement++;
+    }
 }
 
 const sleep = (milliseconds) => {
