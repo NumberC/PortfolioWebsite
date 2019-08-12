@@ -7,7 +7,7 @@
         <script type="text/javascript" src="node_modules/jquery-scrollify/jquery.scrollify.js"></script>
         <title>Fadi Farag</title>
     </head>
-    <body>
+    <body onresize="onBodyResize()">
         <section id="loadBody"  style="text-align:center;">
             <svg id="CodingSymbolSVG">
                 <polyline points="100,0, 0,100, 100,200" style="fill:none;stroke:white;stroke-width:3" />
@@ -30,7 +30,7 @@
                 <li><a href="#ContactID" onclick="smoothScrollFun('Contact')">Contact Me</a></li>
             </ol>
         </nav>
-        <div class="content">
+        <div id="content">
             <section id="HomeID" data-section-name="Home">
                 <p>Home</p>
             </section>
@@ -62,10 +62,11 @@
                 </svg>
             </section>
             <section id="AboutID" data-section-name="About">
-                <p>About Sec</p>
+                <p>About</p>
+                <div id="testCircle"></div>
             </section>
             <section id="ContactID" data-section-name="Contact">
-                <p>Contact Form</p>
+                <p>Contact</p>
             </section>
         </div>
         

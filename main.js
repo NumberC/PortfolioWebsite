@@ -11,7 +11,7 @@ $(function() {
                     navSlideIn();
                     mainCon.style.position = "relative";
                     mainCon.style.left = navbar.offsetWidth + "px";
-                    mainCon.style.width = initContWidth - navbar.offsetWidth + "px";
+                    mainCon.style.width = screen.width - navbar.offsetWidth + "px";
                 }
 
                 if(i == 2){
@@ -48,9 +48,7 @@ var PreviousscrollLeft = -1;
 var languageImage;
 var mainCon;
 var changeOfNav = true;
-var initContWidth;
 var bracketSVG;
-var responsiveBrackFirstTime = true;
 
 var navbar;
 var sticky;
@@ -63,6 +61,14 @@ function sideNavFun() {
   }
 }
 
+function onBodyResize(){
+    console.log("RESIZE");
+    mainCon.style.position = "relative";
+    mainCon.style.left = navbar.offsetWidth + "px";
+    mainCon.style.width = screen.width - navbar.offsetWidth + "px";
+    responsiveBrackForPortfolio(250, false);
+}
+
 window.onscroll = function() {
     sideNavFun();
 };
@@ -72,30 +78,30 @@ window.onload = function() {
 
     navbar = document.getElementById("SideBar");
     sticky = navbar.offsetTop;
-    mainCon = document.getElementsByClassName("content")[0];
+    mainCon = document.getElementById("content");
     scrollLanDiv = document.getElementById("languageDiv");
     languageImage = document.getElementsByClassName("language");
     bracketSVG = document.getElementById("BracketPortfolioSVG");
     originalScrollContent = scrollLanDiv.innerHTML;
 
-    initContWidth = mainCon.offsetWidth;
-
     for(var i = 0; i < 3; i++){
         scrollLanDiv.innerHTML = scrollLanDiv.innerHTML + scrollLanDiv.innerHTML;
     }
 
-    responsiveBrackForPortfolio(250);
+    responsiveBrackForPortfolio(250, true);
     pageScrollTimeOut(500, 1);
     typeHelloWorld("Hello World!");
 };
 
-function responsiveBrackForPortfolio(l){
+function responsiveBrackForPortfolio(l, firstTime){
     var itemIncrement = 0;
     var latestDistanceX = 0;
     var latestDistanceY = 0;
     var isSecondRow = false;
     for(var i = 0; i < 8*2; i = i = i+2){
-        bracketSVG.innerHTML = bracketSVG.innerHTML + "<polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/><image class='portfolioImages' xlink:href='PortfolioImages/PortfolioSite.png' width=0 height=0 /><polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/>";
+        if(firstTime){
+            bracketSVG.innerHTML = bracketSVG.innerHTML + "<polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/><image class='portfolioImages' xlink:href='PortfolioImages/PortfolioSite.png' width=0 height=0 /><polyline points='0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0'/>";
+        }
 
         var divWidth = document.getElementById("PortfolioID").offsetWidth;
         var topAndBottomBrack = 0.25 * l;
@@ -237,7 +243,7 @@ function pageScroll() {
         } else{
             PreviousscrollLeft = scrollLanDiv.scrollLeft;
         }
-    }, 15);
+    }, 50);
 }
 
 function pageScrollTimeOut(sleepMS, iteration){
